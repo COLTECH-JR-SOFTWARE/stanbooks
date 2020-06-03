@@ -92,6 +92,12 @@ yarn sequelize db:seed:all
 # run api
 yarn dev
 ```
+### Testando a API
+
+Os testes deste projeto podem ser realizados por meio de qualquer ferramenta de teste de API REST, durante a construção deste projeto, a ferramenta Insomnia foi utilizada para a realização dos testes.
+Você pode baixar o workspace de testes deste projeto pressionando o botão abaixo, ou acesse o arquivo diretamente deste repositório [insomnia/GoBarber](../../.github/insomnia.json)
+
+
 ### Mobile
 
 ```bash
