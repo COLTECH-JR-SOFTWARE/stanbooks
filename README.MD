@@ -59,9 +59,6 @@ If you decide to use docker, follow this steps to install and run the docker ima
 # install Postgres image (if you don't specify an username it will be postgres by default)
 docker run --name imagename -e POSTGRES_PASSWORD=yourPassword -p 5432:5432 -d postgres
 
-# start Redis
-docker start imageName
-
 # start Postgres
 docker start imageName
 
