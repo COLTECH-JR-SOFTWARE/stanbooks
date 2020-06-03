@@ -5,10 +5,6 @@ import User from '../models/User';
 import File from '../models/File';
 
 import Appointment from '../models/Appointment';
-import Notification from '../schemas/Notification';
-
-import CancellationMail from '../jobs/cancellationMail';
-import Queue from '../../lib/Queue';
 
 class AppointmentsController {
   async index(req, res) {
@@ -96,15 +92,15 @@ class AppointmentsController {
      * Notify appointment provider
      */
     const user = await User.findByPk(req.userId);
-    const formattedDate = format(
+    /* const formattedDate = format(
       hourStart,
       "'dia' dd 'de' MMMM', às' H:mm'h'",
       { locale: pt }
-    );
-    await Notification.create({
+    ); */
+    /*  await Notification.create({
       content: `Novo agendamento de ${user.name} para ${formattedDate}`,
       user: provider_id,
-    });
+    }); */
 
     return res.json(appointment);
   }
@@ -142,10 +138,6 @@ class AppointmentsController {
     appointment.canceled_at = new Date();
 
     await appointment.save();
-
-    await Queue.add(CancellationMail.key, {
-      appointment,
-    });
 
     return res.json(appointment);
   }

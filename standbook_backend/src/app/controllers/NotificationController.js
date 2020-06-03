@@ -1,4 +1,4 @@
-import Notification from '../schemas/Notification';
+/* import Notification from '../schemas/Notification';
 import User from '../models/User';
 
 class NotificationController {
@@ -33,3 +33,4 @@ class NotificationController {
 }
 
 export default new NotificationController();
+ */
