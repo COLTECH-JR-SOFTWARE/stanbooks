@@ -47,7 +47,7 @@ To run the app, you will need [Git](https://git-scm.com), [Node.js](https://node
 Now clone the repository and install the dependencies.
 ```bash
 # to clone the repository
-git clone https://github.com/joaomenna1/COLTECH.git
+git clone https://github.com/COLTECH-JR-SOFTWARE/stanbooks.git
 
 # go into the backend folder
 cd COLTECH/backend
