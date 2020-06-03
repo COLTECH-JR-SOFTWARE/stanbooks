@@ -75,6 +75,11 @@ cd stanbooks/standbooks_backend
 #install the backend dependencies
 yarn
 
+#copy .env.example 
+In terminal, directory /standbooks_backend
+
+cp .env.example .env
+
 ```
 In order to connect to the database, you will need to enter the access informations into a .env file, based on a .env.example file that is provided in the backend folder, change the variables according to your environment.
 ```bash
