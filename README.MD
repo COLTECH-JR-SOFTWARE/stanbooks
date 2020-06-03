@@ -92,6 +92,14 @@ yarn sequelize db:seed:all
 # run api
 yarn dev
 ```
+### Test other functions API
+
+
+The tests for this project can be performed using any API REST test tool. During the construction of this project, the Insomnia tool was used to perform the tests. You can download the test workspace for this project by pressing the button below or access the file directly from this repository.
+
+See much more export [Insomnia_standbooks.json](https://github.com/COLTECH-JR-SOFTWARE/stanbooks/blob/master/standbook_backend/insomnia.json 'Insomnia config') to your Insomnia workspace!
+
+
 ### Mobile
 
 ```bash
