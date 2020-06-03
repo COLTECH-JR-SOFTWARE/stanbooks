@@ -92,7 +92,7 @@ yarn sequelize db:seed:all
 # run api
 yarn dev
 ```
-### Frontend
+### Mobile
 
 ```bash
 # in another tab of the terminal install the frontend dependencies and run it
