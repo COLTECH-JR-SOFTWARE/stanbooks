@@ -27,6 +27,7 @@
 
 </p>
 <br><br>
+
 ## :rocket: Built with
 
 This project was developed with the following technologies:
