@@ -32,17 +32,40 @@
 
 This project was developed with the following technologies:
 
--  [Node.js](https://nodejs.org/)
--  [Express](https://expressjs.com/)
--  [axios](https://github.com/axios/axios)
--  [Jest](https://jestjs.io/)
--  [VS Code](https://code.visualstudio.com/)
+-   [Node.js](https://nodejs.org/)
+-   [Express](https://expressjs.com/)
+-   [JWT](https://jwt.io/)
+-   [Yup](https://www.npmjs.com/package/yup)
+-   [Date-fns](https://date-fns.org/)
+-   [Multer](https://github.com/expressjs/multer)
+-   [ESLint](https://eslint.org/)
+-   [Prettier](https://prettier.io/)
+-   [VS Code](https://code.visualstudio.com/)
 
-## :information_source: How to run
+## :information_source: Getting Started
+
 ### Requirements
-To run the app, you will need [Git](https://git-scm.com), [Node.js](https://nodejs.org/) v12.13.1 or higher, [Yarn](https://yarnpkg.com/).
-<br>
 
+To run the application you will need:
+* [Git](https://git-scm.com)
+* [Node](https://nodejs.org/)
+* [Yarn](https://yarnpkg.com/)
+
+I strongly recommend using [Docker](https://www.docker.com/) to run the databases.
+<br>
+If you decide to use docker, follow this steps to install and run the docker images.
+
+```bash
+# install Postgres image (if you don't specify an username it will be postgres by default)
+docker run --name imagename -e POSTGRES_PASSWORD=yourPassword -p 5432:5432 -d postgres
+
+# start Redis
+docker start imageName
+
+# start Postgres
+docker start imageName
+
+```
 ### Backend
 Now clone the repository and install the dependencies.
 ```bash
@@ -50,44 +73,36 @@ Now clone the repository and install the dependencies.
 git clone https://github.com/COLTECH-JR-SOFTWARE/stanbooks.git
 
 # go into the backend folder
-cd COLTECH/backend
+cd stanbooks/standbooks_backend
 
 #install the backend dependencies
-yarn or npm install
+yarn
 
 ```
 In order to connect to the database, you will need to enter the access informations into a .env file, based on a .env.example file that is provided in the backend folder, change the variables according to your environment.
-### DOCKER
-```
-$> docker-compose up -d
-```
-### manualy
 ```bash
 # run migrations
 yarn sequelize db:migrate
-  &
-npx run sequelize sequelize db:migrate
 
+# run seeds
+yarn sequelize db:seed:all
 
 # run api
-yarn dev & npm run dev
+yarn dev
 ```
 ### Frontend
 
 ```bash
 # in another tab of the terminal install the frontend dependencies and run it
 cd frontend
-yarn or npm install
-yarn start or npm run start
+yarn
+yarn start
 ```
 Use this credentials to access the web application
-<blockquote><strong>email:</strong> admin@coltech.com</blockquote>
+<blockquote><strong>email:</strong> admin@admin.com</blockquote>
 <blockquote> <strong>senha:</strong> 123456</blockquote>
----
 
-## :page_facing_up: License
 
-This project is under the MIT license. See the [LICENSE](https://github.com/joaomenna1/COLTECH/blob/master/LICENSE) for more information
 
 # Padrões de commit
 
