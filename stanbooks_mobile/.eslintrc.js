@@ -7,6 +7,11 @@ module.exports = {
     'prettier',
     'prettier/react'
   ],
+  global:{
+    Atomics: 'readonly',
+    SharedArrayBuffer: 'readonly',
+    __DEV__: true,
+  },
   parser: 'babel-eslint',
   parserOptions: {
     ecmaFeatures: {
@@ -18,6 +23,9 @@ module.exports = {
   plugins: [
     'react',
     'prettier',
+    'react-hooks',
+    'import',
+    'jsx-a11y',
   ],
   rules: {
     'prettier/prettier': 'error',
@@ -40,4 +48,11 @@ module.exports = {
     'react/jsx-one-expression-per-line': 'off',
 
   },
+  settings: {
+    'import/resolver': {
+      'babel-plugin-root-import': {
+        rootPathSuffix: 'src',
+      }
+    }
+  }
 };
