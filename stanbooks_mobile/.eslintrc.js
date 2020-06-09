@@ -28,11 +28,16 @@ module.exports = {
       }
     ],
     'import/prefer-default-export': 'off',
-    'react/state-in-constructor': 'off',
-    'react/static-property-placement': 'off',
-    'react/jsx-props-no-spreading': 'off',
-    'react/prop-types': 'off',
+    'no-unused-vars': [ "error", { argsIgnorePattern: "^_"}],
+    'global-require': 'off',
+    'react-native/no-raw-text': 'off',
     'no-param-reassign': 'off',
-    'no-console': 'off'
+    'no-underscore-dangle': 'off',
+    'no-console': ['error', {allow: ['tron']}],
+    'react-hooks/rules-of-hooks': 'error',
+    'react-hooks/exhaustive-deps': 'warn',
+    camelcase: 'off',
+    'react/jsx-one-expression-per-line': 'off',
+
   },
 };
