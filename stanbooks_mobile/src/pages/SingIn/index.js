@@ -1,18 +1,40 @@
 import React from 'react';
-import { Text } from 'react-native';
+import { Image } from 'react-native';
 
-import Input from '~/components/Input';
-import Button from '~/components/Button';
+import logo from '~/assets/PNG/vertical-positiva.png'
+
 import Background from '~/components/Background';
+
+import { Container, Form, FormInput, SubmitButton, SignLink, SignLinkText } from './styles';
 
 export default function SingIn() {
   return (
     <Background>
-      <Text>Sing In</Text>
+      <Container>
+        <Image source={logo}/>
 
-      <Input style={{ marginTop: 30 }} icon="call" placeholder="Digite seu nome" />
+        <Form>
+          <FormInput
+            icon="mail-outline"
+            keyboardType="email-adress"
+            autoCorrect={false}
+            autoCapitalize="none"
+            placeholder="Digite seu nome"
+          />
 
-      <Button>Entrar</Button>
+          <FormInput
+            icon="lock-outline"
+            secureTextEntry
+            placeholder="Sua senha"
+          />
+
+          <SubmitButton onPress={() => {}}>Acessar</SubmitButton>
+        </Form>
+
+        <SignLink onPress={() => {}}>
+          <SignLinkText>Criar conta gratuita</SignLinkText>
+        </SignLink>
+      </Container>
     </Background>
   );
 };
