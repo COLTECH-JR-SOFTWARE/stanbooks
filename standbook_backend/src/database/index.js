@@ -1,18 +1,10 @@
-/**
- * Arquivo de inicialização do banco de dados e iniciar os nossos models
- * metodo init() responsavel por carregar o bd e nossos models
- * exportar um new Database()
- * sequelize responsavel de fazer a conexao do bd
- */
 import Sequelize from 'sequelize';
-
-import User from '../app/models/User';
-import File from '../app/models/File';
-import Appointment from '../app/models/Appointment';
 
 import databaseConfig from '../config/database';
 
-const models = [User, File, Appointment];
+import User from '../app/models/User';
+
+const models = [User];
 
 class Database {
   constructor() {
@@ -20,11 +12,9 @@ class Database {
   }
 
   init() {
-    this.connection = new Sequelize(databaseConfig);
+    this.sequelize = new Sequelize(databaseConfig);
 
-    models
-      .map(model => model.init(this.connection))
-      .map(model => model.associate && model.associate(this.connection.models));
+    models.map((model) => model.init(this.sequelize));
   }
 }
 
