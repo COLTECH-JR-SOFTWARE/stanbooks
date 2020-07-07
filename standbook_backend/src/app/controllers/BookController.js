@@ -66,16 +66,9 @@ class BookController {
   async update(req, res) {
     const { id } = req.params;
 
-    const { name, url, image_id } = req.body;
+    const { name, url } = req.body;
 
-    const book = await Book.findByPk(id, {
-      include: [
-        {
-          model: File,
-          attributes: ['id', 'name', 'image'],
-        },
-      ],
-    });
+    const book = await Book.findByPk(id);
 
     const userProvider = await User.findOne({
       where: { provider: true },
@@ -98,6 +91,15 @@ class BookController {
     }
 
     await book.update(req.body);
+
+    const { image_id } = await Book.findByPk(id, {
+      include: [
+        {
+          model: File,
+          attributes: ['id', 'image', 'url'],
+        },
+      ],
+    });
 
     return res.json({
       id,
