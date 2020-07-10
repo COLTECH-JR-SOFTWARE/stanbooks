@@ -17,7 +17,7 @@ class BookController {
     }
 
     const userProvider = await User.findOne({
-      where: { provider: true },
+      where: { id: req.userId, provider: true },
     });
 
     if (!userProvider) {
@@ -49,7 +49,7 @@ class BookController {
       attributes: ['id', 'name', 'url', 'image_id'],
     });
 
-    return res.json(books);
+    return res.json([books, req.userId]);
   }
 
   async show(req, res) {
@@ -71,13 +71,11 @@ class BookController {
     const book = await Book.findByPk(id);
 
     const userProvider = await User.findOne({
-      where: { provider: true },
+      where: { id: req.userId, provider: true },
     });
 
     if (!userProvider) {
-      return res
-        .status(400)
-        .json({ error: 'Only providers can delete a book' });
+      return res.status(400).json({ error: 'Only providers can edit a book' });
     }
 
     if (url !== book.url) {

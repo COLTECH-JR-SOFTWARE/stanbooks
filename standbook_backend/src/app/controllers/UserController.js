@@ -1,6 +1,7 @@
 import * as Yup from 'yup';
 
 import User from '../models/User';
+import File from '../models/File';
 
 class UserController {
   async store(req, res) {
@@ -22,12 +23,13 @@ class UserController {
       return res.status(400).json({ error: 'User already exists' });
     }
 
-    const { id, name, email } = await User.create(req.body);
+    const { id, name, email, provider } = await User.create(req.body);
 
     return res.json({
       id,
       name,
       email,
+      provider,
     });
   }
 
@@ -60,6 +62,9 @@ class UserController {
         where: { email: req.body.email },
       });
 
+      console.log(email);
+      console.log(user.email);
+
       if (userExists) {
         return res.status(400).json({ error: 'User already exists' });
       }
@@ -71,12 +76,20 @@ class UserController {
 
     await user.update(req.body);
 
-    const { id, name } = await User.findByPk(req.userId);
+    const { id, name, avatar_id } = await User.findByPk(req.userId, {
+      include: [
+        {
+          model: File,
+          attributes: ['id', 'image', 'url'],
+        },
+      ],
+    });
 
     return res.json({
       id,
       name,
       email,
+      avatar_id,
     });
   }
 }
