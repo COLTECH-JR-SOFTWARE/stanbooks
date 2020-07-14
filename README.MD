@@ -72,9 +72,6 @@ Para rodar as migrations,execute:
 # run migrations
 yarn sequelize db:migrate
 
-# run seeds
-yarn sequelize db:seed:all
-
 # run api
 yarn dev
 ```
