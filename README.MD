@@ -57,10 +57,10 @@ If you decide to use docker, follow this steps to install and run the docker ima
 
 ```bash
 # install Postgres image (if you don't specify an username it will be postgres by default)
-docker run --name imagename -e POSTGRES_PASSWORD=yourPassword -p 5432:5432 -d postgres
+docker run --name stanbookDB -e POSTGRES_PASSWORD=docker -p 5436:5432 -d postgres:11
 
 # start Postgres
-docker start imageName
+docker start stanbookDB
 
 ```
 ### Backend
@@ -75,10 +75,6 @@ cd stanbooks/standbooks_backend
 #install the backend dependencies
 yarn
 
-#copy .env.example 
-In terminal, directory /standbooks_backend
-
-cp .env.example .env
 
 ```
 In order to connect to the database, you will need to enter the access informations into a .env file, based on a .env.example file that is provided in the backend folder, change the variables according to your environment.
@@ -92,24 +88,9 @@ yarn sequelize db:seed:all
 # run api
 yarn dev
 ```
-### Test other functions API
 
-
-The tests for this project can be performed using any API REST test tool. During the construction of this project, the Insomnia tool was used to perform the tests. You can download the test workspace for this project by pressing the button below or access the file directly from this repository.
-
-See much more export [Insomnia_standbooks.json](https://github.com/COLTECH-JR-SOFTWARE/stanbooks/blob/master/standbook_backend/insomnia.json 'Insomnia config') to your Insomnia workspace!
-
-
-### Mobile
-
-```bash
-# in another tab of the terminal install the frontend dependencies and run it
-cd frontend
-yarn
-yarn start
-```
 Use this credentials to access the web application
-<blockquote><strong>email:</strong> admin@admin.com</blockquote>
+<blockquote><strong>email:</strong>usertest@email.com</blockquote>
 <blockquote> <strong>senha:</strong> 123456</blockquote>
 
 
