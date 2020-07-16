@@ -24,7 +24,15 @@ class LoanController {
   }
 
   async index(req, res) {
-    return res.json({ ok: true });
+    const id = req.userId;
+
+    const books = await Loan.findAll({
+      where: { user_id: id },
+    });
+
+    console.log(books);
+
+    return res.json(books);
   }
 }
 
