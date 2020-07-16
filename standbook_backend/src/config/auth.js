@@ -1,6 +1,6 @@
 export default {
-  secret: '3fac33f78d42352147fe8977fe1f8d88',
+  secret: `${process.env.APP_SECRET}`,
   expiresIn: '7d',
 };
 
-// hash de "standbookprojetocoltech2020 "
+// hash de "standbookprojetocoltech2020"
