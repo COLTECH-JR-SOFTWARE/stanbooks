@@ -66,10 +66,6 @@ cd stanbooks/standbooks_backend
 #install the backend dependencies
 yarn
 
-<<<<<<< HEAD
-
-=======
->>>>>>> 642bc52e393648733f6eb65a25b2d30bd2946a9d
 ```
 Para rodar as migrations,execute:
 ```bash
