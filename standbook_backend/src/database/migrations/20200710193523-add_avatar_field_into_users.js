@@ -9,10 +9,7 @@ module.exports = {
     });
   },
 
-  down: queryInterface => {
+  down: (queryInterface) => {
     return queryInterface.removeColumn('users', 'avatar_id');
   },
 };
-/**
- * Neste arquivo estou add uma coluna em uma tabela que ja foi criada
- */

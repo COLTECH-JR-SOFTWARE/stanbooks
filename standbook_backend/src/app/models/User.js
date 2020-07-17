@@ -1,5 +1,4 @@
 import Sequelize, { Model } from 'sequelize';
-
 import bcrypt from 'bcryptjs';
 
 class User extends Model {
@@ -17,16 +16,18 @@ class User extends Model {
       }
     );
 
-    this.addHook('beforeSave', async user => {
+    // hash da senha com força 8
+    this.addHook('beforeSave', async (user) => {
       if (user.password) {
         user.password_hash = await bcrypt.hash(user.password, 8);
       }
     });
+
     return this;
   }
 
   static associate(models) {
-    this.belongsTo(models.File, { foreignKey: 'avatar_id', as: 'avatar' });
+    this.belongsTo(models.File, { foreignKey: 'avatar_id' });
   }
 
   checkPassword(password) {
