@@ -49,7 +49,7 @@ class BookController {
       attributes: ['id', 'name', 'url', 'image_id'],
     });
 
-    return res.json([books, req.userId]);
+    return res.json(books);
   }
 
   async show(req, res) {
