@@ -1,4 +1,5 @@
 import * as Yup from 'yup';
+import { Op } from 'sequelize';
 
 import Book from '../models/Book';
 import User from '../models/User';
@@ -24,6 +25,14 @@ class BookController {
       return res
         .status(400)
         .json({ error: 'Only providers can register a book' });
+    }
+
+    const imageExist = await File.findOne({
+      where: { id: req.body.image_id },
+    });
+
+    if (!imageExist) {
+      return res.status(400).json({ error: 'Image does not exist' });
     }
 
     const bookExists = await Book.findOne({
@@ -55,6 +64,14 @@ class BookController {
   async show(req, res) {
     const { id } = req.params;
 
+    const indexExist = await Book.findOne({
+      where: { id },
+    });
+
+    if (!indexExist) {
+      return res.status(400).json({ error: 'Book not found' });
+    }
+
     const book = await Book.findAll({
       where: { id, deleted_at: null },
       attributes: ['id', 'name', 'url', 'image_id'],
@@ -63,8 +80,31 @@ class BookController {
     return res.json(book);
   }
 
+  async search(req, res) {
+    const query = `%${req.query.name}%`;
+
+    const bookExists = await Book.findAll({
+      where: { name: { [Op.iLike]: query } },
+      attributes: ['id', 'name', 'url', 'image_id'],
+    });
+
+    if (!bookExists) {
+      return res.status(400).json({ error: 'Book not found' });
+    }
+
+    return res.json(bookExists);
+  }
+
   async update(req, res) {
     const { id } = req.params;
+
+    const indexExist = await Book.findOne({
+      where: { id },
+    });
+
+    if (!indexExist) {
+      return res.status(400).json({ error: 'Book not found' });
+    }
 
     const { name, url } = req.body;
 
@@ -109,6 +149,14 @@ class BookController {
 
   async delete(req, res) {
     const { id } = req.params;
+
+    const indexExist = await Book.findOne({
+      where: { id },
+    });
+
+    if (!indexExist) {
+      return res.status(400).json({ error: 'Book not found' });
+    }
 
     const book = await Book.findByPk(id);
 

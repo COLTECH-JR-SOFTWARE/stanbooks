@@ -24,6 +24,7 @@ routes.post('/files', upload.single('file'), FileController.store);
 
 routes.post('/books', BookController.store);
 routes.get('/books', BookController.index);
+routes.get('/books/search', BookController.search);
 routes.get('/books/:id', BookController.show);
 routes.put('/books/:id', BookController.update);
 routes.delete('/books/:id', BookController.delete);
