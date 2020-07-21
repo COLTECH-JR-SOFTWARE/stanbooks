@@ -1,5 +1,4 @@
 import * as Yup from 'yup';
-import { Op } from 'sequelize';
 
 import Book from '../models/Book';
 import User from '../models/User';
@@ -56,6 +55,12 @@ class BookController {
     const books = await Book.findAll({
       where: { deleted_at: null },
       attributes: ['id', 'name', 'url', 'image_id'],
+      include: [
+        {
+          model: File,
+          attributes: ['url_image', 'image', 'name'],
+        },
+      ],
     });
 
     return res.json([books, req.userId]);
@@ -78,21 +83,6 @@ class BookController {
     });
 
     return res.json(book);
-  }
-
-  async search(req, res) {
-    const query = `%${req.query.name}%`;
-
-    const bookExists = await Book.findAll({
-      where: { name: { [Op.iLike]: query } },
-      attributes: ['id', 'name', 'url', 'image_id'],
-    });
-
-    if (!bookExists) {
-      return res.status(400).json({ error: 'Book not found' });
-    }
-
-    return res.json(bookExists);
   }
 
   async update(req, res) {
