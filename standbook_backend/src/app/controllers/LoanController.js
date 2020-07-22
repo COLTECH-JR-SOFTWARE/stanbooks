@@ -1,4 +1,5 @@
 import Book from '../models/Book';
+import File from '../models/File';
 import Loan from '../models/Loan';
 
 class LoanController {
@@ -11,6 +12,14 @@ class LoanController {
 
     if (!bookExist) {
       return res.status(400).json({ error: 'Book does not exist' });
+    }
+
+    const bookBorrowed = await Loan.findOne({
+      where: { book_id: bookExist.id, user_id: req.userId },
+    });
+
+    if (bookBorrowed) {
+      return res.status(400).json({ error: 'Book already borrowed' });
     }
 
     const user_id = req.userId;
@@ -28,9 +37,19 @@ class LoanController {
 
     const books = await Loan.findAll({
       where: { user_id: id },
+      include: [
+        {
+          model: Book,
+          attributes: ['name', 'image_id'],
+          include: [
+            {
+              model: File,
+              attributes: ['url_image', 'image', 'name'],
+            },
+          ],
+        },
+      ],
     });
-
-    console.log(books);
 
     return res.json(books);
   }
