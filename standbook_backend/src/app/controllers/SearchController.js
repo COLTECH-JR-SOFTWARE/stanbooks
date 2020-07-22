@@ -1,6 +1,7 @@
 import { Op } from 'sequelize';
 
 import Book from '../models/Book';
+import File from '../models/File';
 
 class SearchController {
   async store(req, res) {
@@ -9,6 +10,12 @@ class SearchController {
     const bookExists = await Book.findAll({
       where: { name: { [Op.iLike]: query } },
       attributes: ['id', 'name', 'url', 'image_id'],
+      include: [
+        {
+          model: File,
+          attributes: ['url_image', 'image', 'name'],
+        },
+      ],
     });
 
     if (!bookExists) {

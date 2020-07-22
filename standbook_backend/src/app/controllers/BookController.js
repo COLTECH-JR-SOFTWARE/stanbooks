@@ -80,6 +80,12 @@ class BookController {
     const book = await Book.findAll({
       where: { id, deleted_at: null },
       attributes: ['id', 'name', 'url', 'image_id'],
+      include: [
+        {
+          model: File,
+          attributes: ['url_image', 'image', 'name'],
+        },
+      ],
     });
 
     return res.json(book);
@@ -124,7 +130,7 @@ class BookController {
       include: [
         {
           model: File,
-          attributes: ['id', 'image', 'url'],
+          attributes: ['id', 'image', 'url_image'],
         },
       ],
     });
