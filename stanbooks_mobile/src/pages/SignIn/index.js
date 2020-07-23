@@ -39,7 +39,7 @@ export default function SignIn({ navigation }) {
             onSubmitEditing={handleSubmit}
           />
 
-          <SubmitButton onPress={handleSubmit}>Acessar</SubmitButton>
+          <SubmitButton onPress={navigation.navigate('Navigation')}>Acessar</SubmitButton>
         </Form>
 
         <SignLink onPress={() => navigation.navigate('SignUp')}>
