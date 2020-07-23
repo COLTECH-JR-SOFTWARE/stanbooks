@@ -6,7 +6,7 @@ class File extends Model {
       {
         name: Sequelize.STRING,
         image: Sequelize.STRING,
-        url: {
+        url_image: {
           type: Sequelize.VIRTUAL,
           get() {
             return `${process.env.APP_URL}/files/${this.image}`;
