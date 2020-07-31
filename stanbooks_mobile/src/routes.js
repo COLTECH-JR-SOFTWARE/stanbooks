@@ -19,7 +19,7 @@ export default function Routes() {
       >
         <Stack.Screen name='SignIn' component={SignIn} />
         <Stack.Screen name='SignUp' component={SignUp} />
-        <Stack.Screen name='Navigation' component={Navigation} />
+
       </Stack.Navigator>
     </NavigationContainer>
   );

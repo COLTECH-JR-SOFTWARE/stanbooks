@@ -51,7 +51,7 @@ export default function SignUp({ navigation }) {
             onSubmitEditing={handleSubmit}
           />
 
-          <SubmitButton onPress={() => navigation.navigate('Navigation')}>Cadastrar</SubmitButton>
+          <SubmitButton onPress={handleSubmit}>Cadastrar</SubmitButton>
         </Form>
 
         <SignLink onPress={() => navigation.navigate('SignIn')}>
