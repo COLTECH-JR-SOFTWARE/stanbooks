@@ -8,18 +8,30 @@ import Navigation from '~/pages/Navigation';
 
 const Stack = createStackNavigator();
 
-export default function Routes() {
+export default (props) => {
   return (
     <NavigationContainer>
       <Stack.Navigator
-        initialRouteName='SignIn'
+        initialRouteName={props.signed ? Navigation : SignIn}
         screenOptions={{
           headerShown: false,
         }}
       >
-        <Stack.Screen name='SignIn' component={SignIn} />
+
+        {props.signed ? (
+          <>
+            <Stack.Screen name='Navigation' component={Navigation} />
+          </>
+        ) : (
+          <>
+            <Stack.Screen name='SignIn' component={SignIn} />
+            <Stack.Screen name='SignUp' component={SignUp} />
+          </>
+        ) }
+
+        {/* <Stack.Screen name='SignIn' component={SignIn} />
         <Stack.Screen name='SignUp' component={SignUp} />
-        <Stack.Screen name='Navigation' component={Navigation} />
+        <Stack.Screen name='Navigation' component={Navigation} /> */}
       </Stack.Navigator>
     </NavigationContainer>
   );
