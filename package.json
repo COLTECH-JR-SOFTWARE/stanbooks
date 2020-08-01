@@ -4,10 +4,13 @@
   "main": "index.js",
   "license": "MIT",
   "scripts": {
-    "dev": "nodemon src/server.js"
+    "dev": "nodemon src/server.js",
+    "build": "sucrase ./src -d ./dist --transforms imports",
+    "start": "node dist/server.js"
   },
   "dependencies": {
     "bcryptjs": "^2.4.3",
+    "cors": "^2.8.5",
     "crypto": "^1.0.1",
     "date-fns": "^2.14.0",
     "dotenv": "^8.2.0",
@@ -17,6 +20,7 @@
     "pg": "^8.2.1",
     "pg-hstore": "^2.3.3",
     "sequelize": "^6.2.3",
+    "sequelize-cli": "^6.1.0",
     "yup": "^0.29.1"
   },
   "devDependencies": {
@@ -27,7 +31,6 @@
     "eslint-plugin-prettier": "^3.1.4",
     "nodemon": "^2.0.4",
     "prettier": "^2.0.5",
-    "sequelize-cli": "^6.1.0",
     "sucrase": "^3.15.0"
   }
 }

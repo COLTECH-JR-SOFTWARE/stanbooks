@@ -26,6 +26,14 @@ class BookController {
         .json({ error: 'Only providers can register a book' });
     }
 
+    const imageExist = await File.findOne({
+      where: { id: req.body.image_id },
+    });
+
+    if (!imageExist) {
+      return res.status(400).json({ error: 'Image does not exist' });
+    }
+
     const bookExists = await Book.findOne({
       where: { url: req.body.url },
     });
@@ -47,6 +55,12 @@ class BookController {
     const books = await Book.findAll({
       where: { deleted_at: null },
       attributes: ['id', 'name', 'url', 'image_id'],
+      include: [
+        {
+          model: File,
+          attributes: ['url_image', 'image', 'name'],
+        },
+      ],
     });
 
     return res.json([books, req.userId]);
@@ -55,9 +69,23 @@ class BookController {
   async show(req, res) {
     const { id } = req.params;
 
+    const indexExist = await Book.findOne({
+      where: { id },
+    });
+
+    if (!indexExist) {
+      return res.status(400).json({ error: 'Book not found' });
+    }
+
     const book = await Book.findAll({
       where: { id, deleted_at: null },
       attributes: ['id', 'name', 'url', 'image_id'],
+      include: [
+        {
+          model: File,
+          attributes: ['url_image', 'image', 'name'],
+        },
+      ],
     });
 
     return res.json(book);
@@ -65,6 +93,14 @@ class BookController {
 
   async update(req, res) {
     const { id } = req.params;
+
+    const indexExist = await Book.findOne({
+      where: { id },
+    });
+
+    if (!indexExist) {
+      return res.status(400).json({ error: 'Book not found' });
+    }
 
     const { name, url } = req.body;
 
@@ -94,7 +130,7 @@ class BookController {
       include: [
         {
           model: File,
-          attributes: ['id', 'image', 'url'],
+          attributes: ['id', 'image', 'url_image'],
         },
       ],
     });
@@ -109,6 +145,14 @@ class BookController {
 
   async delete(req, res) {
     const { id } = req.params;
+
+    const indexExist = await Book.findOne({
+      where: { id },
+    });
+
+    if (!indexExist) {
+      return res.status(400).json({ error: 'Book not found' });
+    }
 
     const book = await Book.findByPk(id);
 
