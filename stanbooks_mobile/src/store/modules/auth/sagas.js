@@ -1,5 +1,5 @@
 import { Alert } from 'react-native';
-import { takeLatest, call, put, all } from 'redux-saga/effects';
+import { takeLatest, call, put, all, delay } from 'redux-saga/effects';
 
 import api from '~/services/api';
 
@@ -16,15 +16,17 @@ export function* signIn({ payload }) {
 
     const { token, user } = response.data;
 
-    if (user.provider) {
-      Alert.alert(
-        'Erro no login',
-        'O seu usuário faz parte do admin'
-      );
-      return;
-    }
+    // if (user.provider) {
+    //   Alert.alert(
+    //     'Erro no login',
+    //     'O seu usuário faz parte do admin'
+    //   );
+    //   return;
+    // }
+
 
     api.defaults.headers.Authorization = `Bearer ${token}`;
+
 
     yield put(signInSuccess(token, user));
 
