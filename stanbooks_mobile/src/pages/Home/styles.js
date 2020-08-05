@@ -58,5 +58,14 @@ export default StyleSheet.create({
     width: null,
     height: null,
     resizeMode: 'contain'
+  },
+  background: {
+    flex: 1,
+    resizeMode: "cover",
+  },
+  backgroundImage: {
+    opacity: 0.2,
+    marginLeft: '-50%',
+    marginBottom: '-90%',
   }
 });
