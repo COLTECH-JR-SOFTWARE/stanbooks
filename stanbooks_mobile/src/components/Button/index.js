@@ -1,14 +1,14 @@
 import React from 'react';
-import {  ActivityIndicator } from 'react-native';
+import { ActivityIndicator } from 'react-native';
 import PropTypes from 'prop-types';
 
 import { Container, Text } from './styles';
 
 export default function Button({ children, loading, ...rest }){
   return(
-    <Container>
+    <Container {...rest}>
       {loading ? (
-        <ActivityIndicator  size="small" color="#111110"/>
+        <ActivityIndicator  size="small" color="#FFF"/>
       ) : (
         <Text>{children}</Text>
       )}
