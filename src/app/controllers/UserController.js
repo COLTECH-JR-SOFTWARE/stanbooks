@@ -89,6 +89,12 @@ class UserController {
       avatar_id,
     });
   }
+
+  async index(req, res) {
+    const users = User.findAll();
+
+    return res.json(users);
+  }
 }
 
 export default new UserController();
