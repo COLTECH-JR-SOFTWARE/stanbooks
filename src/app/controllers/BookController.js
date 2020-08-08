@@ -106,7 +106,7 @@ class BookController {
 
     const book = await Book.findByPk(id);
 
-    const userProvider = await User.findOne({
+    const userProvider = await User.findAll({
       where: { id: req.userId, provider: true },
     });
 
@@ -156,7 +156,7 @@ class BookController {
 
     const book = await Book.findByPk(id);
 
-    const userProvider = await User.findOne({
+    const userProvider = await User.findAll({
       where: { provider: true },
     });
 
