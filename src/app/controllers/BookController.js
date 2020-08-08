@@ -16,7 +16,7 @@ class BookController {
       return res.status(400).json({ error: 'Validation fails' });
     }
 
-    const userProvider = await User.findOne({
+    const userProvider = await User.findAll({
       where: { id: req.userId, provider: true },
     });
 
@@ -63,7 +63,7 @@ class BookController {
       ],
     });
 
-    return res.json([books, req.userId]);
+    return res.json(books);
   }
 
   async show(req, res) {
