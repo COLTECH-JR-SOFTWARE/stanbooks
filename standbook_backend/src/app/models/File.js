@@ -5,11 +5,11 @@ class File extends Model {
     super.init(
       {
         name: Sequelize.STRING,
-        path: Sequelize.STRING,
-        url: {
+        image: Sequelize.STRING,
+        url_image: {
           type: Sequelize.VIRTUAL,
           get() {
-            return `${process.env.APP_URL}/files/${this.path}`;
+            return `${process.env.APP_URL}/files/${this.image}`;
           },
         },
       },
@@ -17,7 +17,6 @@ class File extends Model {
         sequelize,
       }
     );
-
     return this;
   }
 }

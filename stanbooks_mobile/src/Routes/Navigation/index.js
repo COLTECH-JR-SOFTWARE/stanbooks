@@ -30,11 +30,11 @@ const Navigation = ({navigation}) => {
     <Tab.Navigator
       tabBarOptions={{
         style: {
-          backgroundColor: "#FF6600",
+          backgroundColor: "#FFF",
           borderTopColor: 'rgba(255, 255, 255, 0.1)',
         },
-        activeTintColor: '#fff',
-        inactiveTintColor:'#92929c'
+        activeTintColor: '#FF6600',
+        inactiveTintColor:'#999'
       }}
     >
       <Tab.Screen

@@ -1,4 +1,6 @@
 export default {
-  secret: process.env.APP_SECRET,
+  secret: `${process.env.APP_SECRET}`,
   expiresIn: '7d',
 };
+
+// hash de "standbookprojetocoltech2020"
