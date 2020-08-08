@@ -23,6 +23,7 @@ routes.put('/users', UserController.update);
 routes.get('/users', UserController.index);
 
 routes.post('/files', upload.single('file'), FileController.store);
+routes.get('/files', FileController.index);
 
 routes.post('/books', BookController.store);
 routes.get('/books', BookController.index);
