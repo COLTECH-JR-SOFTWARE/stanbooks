@@ -13,6 +13,7 @@ export const Container = styled.View`
 export const Input = styled.TextInput`
   font-size: 16px;
   padding: 8px 0;
+  flex: 1;
 `;
 
 export const SearchBarIcon = styled(Icon)`

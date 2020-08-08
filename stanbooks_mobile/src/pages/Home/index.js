@@ -19,7 +19,7 @@ export default function Home() {
       headers: { Authorization: `Bearer ${userToken}` },
       params: { name: query }
     });
-
+    console.log(data);
     setBooks(data);
   }
 
@@ -40,7 +40,7 @@ export default function Home() {
         renderItem={({ item: book })=>(
           <View style={styles.book}>
             <View style={styles.imageContainer}>
-              <Image source={book.File.url_image} style={styles.imageBook}/>
+              <Image source={{ uri: 'https://www.google.com/images/branding/googlelogo/1x/googlelogo_color_272x92dp.png' }} style={styles.imageBook}/>
             </View>
             <Text style={styles.bookName}>{book.name}</Text>
           </View>
