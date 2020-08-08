@@ -34,7 +34,7 @@ class BookController {
       return res.status(400).json({ error: 'Image does not exist' });
     }
 
-    const bookExists = await Book.findAll({
+    const bookExists = await Book.findOne({
       where: { url: req.body.url, deleted_at: null },
     });
 
@@ -147,7 +147,7 @@ class BookController {
     const { id } = req.params;
 
     const indexExist = await Book.findOne({
-      where: { id },
+      where: { id, deleted_at: null },
     });
 
     if (!indexExist) {
