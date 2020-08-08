@@ -91,7 +91,9 @@ class UserController {
   }
 
   async index(req, res) {
-    const users = await User.findAll();
+    const users = await User.findAll({
+      include: ['id', 'name', 'email', 'provider', 'avatar_id'],
+    });
 
     return res.json(users);
   }
