@@ -6,4 +6,3 @@ export default styled(LinearGradient).attrs({
 })`
   flex: 1;
 `;
-

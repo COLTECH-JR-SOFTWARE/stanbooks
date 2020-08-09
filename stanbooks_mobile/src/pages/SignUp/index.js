@@ -1,14 +1,13 @@
 import React, { useRef, useState } from 'react';
-import { Image } from 'react-native';
 import { useDispatch, useSelector } from 'react-redux';
 
-import logo from '~/assets/PNG/vertical-positiva.png'
+import logo from '~/assets/PNG/vertical-colorida-flat.png'
 
-import Background from '~/components/Background';
+import DefaultBackground from '~/components/DefaultBackground';
 
 import { signUpRequest } from '~/store/modules/auth/actions';
 
-import { Container, Form, FormInput, SubmitButton, SignLink, SignLinkText } from './styles.js';
+import { Container, Form, FormInput, SubmitButton, SignLink, SignLinkText, Image } from './styles.js';
 
 export default function SignUp({ navigation }) {
   const dispatch = useDispatch();
@@ -28,7 +27,7 @@ export default function SignUp({ navigation }) {
 
 
   return (
-    <Background>
+    <DefaultBackground>
       <Container>
         <Image source={logo}/>
 
@@ -77,6 +76,6 @@ export default function SignUp({ navigation }) {
           <SignLinkText>Já tenho conta</SignLinkText>
         </SignLink>
       </Container>
-    </Background>
+    </DefaultBackground>
   );
 };
