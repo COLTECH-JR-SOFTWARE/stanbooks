@@ -1,55 +1,55 @@
-import React, { Component } from 'react';
+import React, { useRef } from 'react';
+import { useSelector } from 'react-redux';
+import { Alert } from 'react-native';
 
-import {
-  AppRegistry,
-  StyleSheet,
-  Text,
-  TouchableOpacity,
-  Linking
-} from 'react-native';
+import api from '~services/api';
 
 import QRCodeScanner from 'react-native-qrcode-scanner';
 import { RNCamera } from 'react-native-camera';
 
-function QRCode(){
-  const onSuccess = e => {
-    alert(e.data);
-    // Linking.openURL(e.data).catch(err =>
-    //   console.error('An error occured', err)
-    // );
+export default function QRCode(){
+  const scanner = useRef(null);
+  const userToken = useSelector(state => state.auth.token);
+  const config = {
+    headers: { Authorization: `Bearer ${userToken}` }
   };
+
+  function confirmAction(bookUrl){
+    Alert.alert(
+      "Novo empréstimo",
+      "Deseja Emprestar esse livro? (nome do livro)",
+      [
+        {
+          text: "Cancelar",
+          onPress: () => scanner.current.reactivate(),
+          style: "cancel"
+        },
+        { text: "OK", onPress: () => bookLoan(bookUrl) }
+      ],
+      { cancelable: false }
+    );
+  }
+
+  async function bookLoan(bookUrl){
+    try {
+      const data = { link: bookUrl}
+
+      await api.post('loan', data, config);
+
+      alert('Empréstimo Realizado');
+    }catch(err){
+      console.log(err);
+      alert('Falha no empréstimo')
+    }
+
+    scanner.current.reactivate();
+  }
 
   return (
     <QRCodeScanner
-      onRead={onSuccess}
+      onRead={e => confirmAction(e.data)}
       flashMode={RNCamera.Constants.FlashMode.off}
-      bottomContent={
-        <TouchableOpacity style={styles.buttonTouchable}>
-
-        </TouchableOpacity>
-      }
+      ref={scanner}
     />
   );
 }
-
-const styles = StyleSheet.create({
-  centerText: {
-    flex: 1,
-    fontSize: 18,
-    padding: 32,
-    color: '#777'
-  },
-  textBold: {
-    fontWeight: '500',
-    color: '#000'
-  },
-  buttonText: {
-    fontSize: 21,
-    color: 'rgb(0,122,255)'
-  },
-  buttonTouchable: {
-    padding: 16
-  }
-});
-
-export default QRCode;
