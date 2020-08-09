@@ -4,10 +4,10 @@ import Loan from '../models/Loan';
 
 class LoanController {
   async store(req, res) {
-    const { link } = req.body;
+    const { id_book } = req.body;
 
     const bookExist = await Book.findOne({
-      where: { url: link },
+      where: { id: id_book },
     });
 
     if (!bookExist) {
@@ -25,7 +25,7 @@ class LoanController {
     const user_id = req.userId;
     const book_id = bookExist.id;
 
-    const loan = { link, user_id, book_id };
+    const loan = { user_id, book_id };
 
     await Loan.create(loan);
 
