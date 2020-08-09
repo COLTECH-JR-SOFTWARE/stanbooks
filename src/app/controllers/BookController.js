@@ -8,7 +8,7 @@ class BookController {
   async store(req, res) {
     const schema = Yup.object().shape({
       name: Yup.string().required(),
-      url: Yup.string().required(),
+      url: Yup.string().url().required(),
       image_id: Yup.number().integer().required(),
     });
 
