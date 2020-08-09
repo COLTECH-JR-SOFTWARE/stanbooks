@@ -29,11 +29,16 @@ export const SignLink = styled.TouchableOpacity`
 `;
 
 export const SignLinkText = styled.Text`
-  color: #111110;
+  color: #FF6600;
   font-weight: bold;
   font-size: 16px
 `;
 
 export const Strong = styled.Text`
   font-weight: bold;
+`;
+
+export const Image = styled.Image`
+  width: 100px;
+  height: 100px;
 `;
