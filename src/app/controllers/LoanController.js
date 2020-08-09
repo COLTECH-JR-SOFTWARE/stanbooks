@@ -1,13 +1,23 @@
+import * as Yup from 'yup';
+
 import Book from '../models/Book';
 import File from '../models/File';
 import Loan from '../models/Loan';
 
 class LoanController {
   async store(req, res) {
-    const { id_book } = req.body;
+    const schema = Yup.object().shape({
+      link: Yup.string().required(),
+    });
+
+    if (!(await schema.isValid(req.body))) {
+      return res.status(400).json({ error: 'Validation fails' });
+    }
+
+    const { link } = req.body;
 
     const bookExist = await Book.findOne({
-      where: { id: id_book },
+      where: { id: link },
     });
 
     if (!bookExist) {
@@ -25,7 +35,7 @@ class LoanController {
     const user_id = req.userId;
     const book_id = bookExist.id;
 
-    const loan = { user_id, book_id };
+    const loan = { link, user_id, book_id };
 
     await Loan.create(loan);
 
