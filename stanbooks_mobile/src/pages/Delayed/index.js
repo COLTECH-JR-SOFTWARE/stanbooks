@@ -3,7 +3,7 @@ import MaterialIcons from 'react-native-vector-icons/MaterialIcons';
 
 import { Container, ArrowBack, SignLink } from './styles';
 
-const Loan = ({navigation}) => {
+const Delayed = ({navigation}) => {
   return (
     <Container>
       <ArrowBack>
@@ -15,4 +15,4 @@ const Loan = ({navigation}) => {
   );
 }
 
-export default Loan;
+export default Delayed;
