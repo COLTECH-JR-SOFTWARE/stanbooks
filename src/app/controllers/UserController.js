@@ -75,7 +75,7 @@ class UserController {
       include: [
         {
           model: File,
-          attributes: ['id', 'image', 'url'],
+          attributes: ['id', 'image', 'url_image'],
         },
       ],
     });
