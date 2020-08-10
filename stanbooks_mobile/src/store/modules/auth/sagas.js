@@ -18,8 +18,6 @@ export function* signIn({ payload }) {
 
     const user = { name, email};
 
-    console.tron.log(user);
-
     // if (user.provider) {
     //   Alert.alert(
     //     'Erro no login',

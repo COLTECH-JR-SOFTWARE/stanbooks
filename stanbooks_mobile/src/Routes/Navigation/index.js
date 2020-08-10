@@ -30,8 +30,10 @@ const Navigation = ({navigation}) => {
     <Tab.Navigator
       tabBarOptions={{
         style: {
-          backgroundColor: "#FFF",
-          borderTopColor: 'rgba(255, 255, 255, 0.1)',
+          backgroundColor:'transparent',
+          borderTopWidth: 0,
+          position: 'absolute',
+          elevation: 0
         },
         activeTintColor: '#FF6600',
         inactiveTintColor:'rgba(255, 153, 51, 0.7)',
