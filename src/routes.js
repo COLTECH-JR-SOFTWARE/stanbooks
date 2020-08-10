@@ -15,6 +15,7 @@ const routes = new Router();
 const upload = multer(multerConfig);
 
 routes.post('/users', UserController.store);
+routes.get('/users', UserController.index);
 routes.post('/sessions', SessionController.store);
 
 routes.use(authMiddleware); // as rotas abaixo precisarão de autenticação para serem acessadas
@@ -33,5 +34,6 @@ routes.get('/search/book', SearchController.store);
 
 routes.post('/loan', LoanController.store);
 routes.get('/loan', LoanController.index);
+routes.delete('/loan/:id', LoanController.delete);
 
 export default routes;

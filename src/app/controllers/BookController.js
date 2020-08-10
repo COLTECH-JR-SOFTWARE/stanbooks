@@ -16,7 +16,7 @@ class BookController {
       return res.status(400).json({ error: 'Validation fails' });
     }
 
-    const userProvider = await User.findOne({
+    const userProvider = await User.findAll({
       where: { id: req.userId, provider: true },
     });
 
@@ -35,7 +35,7 @@ class BookController {
     }
 
     const bookExists = await Book.findOne({
-      where: { url: req.body.url },
+      where: { url: req.body.url, deleted_at: null },
     });
 
     if (bookExists) {
@@ -63,7 +63,7 @@ class BookController {
       ],
     });
 
-    return res.json([books, req.userId]);
+    return res.json(books);
   }
 
   async show(req, res) {
@@ -106,7 +106,7 @@ class BookController {
 
     const book = await Book.findByPk(id);
 
-    const userProvider = await User.findOne({
+    const userProvider = await User.findAll({
       where: { id: req.userId, provider: true },
     });
 
@@ -147,7 +147,7 @@ class BookController {
     const { id } = req.params;
 
     const indexExist = await Book.findOne({
-      where: { id },
+      where: { id, deleted_at: null },
     });
 
     if (!indexExist) {
@@ -156,7 +156,7 @@ class BookController {
 
     const book = await Book.findByPk(id);
 
-    const userProvider = await User.findOne({
+    const userProvider = await User.findAll({
       where: { provider: true },
     });
 

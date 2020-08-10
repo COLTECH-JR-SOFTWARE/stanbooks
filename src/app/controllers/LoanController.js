@@ -1,13 +1,23 @@
+import * as Yup from 'yup';
+
 import Book from '../models/Book';
 import File from '../models/File';
 import Loan from '../models/Loan';
 
 class LoanController {
   async store(req, res) {
+    const schema = Yup.object().shape({
+      link: Yup.string().required(),
+    });
+
+    if (!(await schema.isValid(req.body))) {
+      return res.status(400).json({ error: 'Validation fails' });
+    }
+
     const { link } = req.body;
 
     const bookExist = await Book.findOne({
-      where: { url: link },
+      where: { id: link },
     });
 
     if (!bookExist) {
@@ -52,6 +62,24 @@ class LoanController {
     });
 
     return res.json(books);
+  }
+
+  async delete(req, res) {
+    const { id } = req.params;
+
+    const indexExist = await Loan.findOne({
+      where: { id },
+    });
+
+    if (!indexExist) {
+      return res.status(400).json({ error: 'Loan not found' });
+    }
+
+    const loan = await Loan.findByPk(id);
+
+    await loan.destroy();
+
+    return res.json({ ok: true });
   }
 }
 
