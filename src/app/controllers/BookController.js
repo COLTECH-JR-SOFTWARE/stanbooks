@@ -58,7 +58,7 @@ class BookController {
       include: [
         {
           model: File,
-          attributes: ['url_image', 'image', 'name'],
+          attributes: ['url', 'image', 'name'],
         },
       ],
     });
