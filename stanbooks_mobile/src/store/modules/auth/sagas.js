@@ -14,7 +14,11 @@ export function* signIn({ payload }) {
       password,
     });
 
-    const { token, user } = response.data;
+    const { token, name } = response.data;
+
+    const user = { name, email};
+
+    console.tron.log(user);
 
     // if (user.provider) {
     //   Alert.alert(
@@ -49,6 +53,11 @@ export function* signUp({ payload }) {
       email,
       password,
     });
+
+    Alert.alert(
+      'Cadastro realizado',
+      'Sua conta foi realizada, volte para fazer login.'
+    );
 
     // history.push('/');
   } catch (err) {

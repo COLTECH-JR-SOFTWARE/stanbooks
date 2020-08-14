@@ -5,6 +5,7 @@ import { useSelector } from 'react-redux';
 import api from '~services/api';
 import SearchBar from './SearchBar';
 import ResultMessage from './ResultMessage';
+import DefaultBackground from '~/components/DefaultBackground';
 import { Container, List, Book, ImageContainer, BookImage, BookName } from './styles';
 
 export default function Home() {
@@ -48,7 +49,7 @@ export default function Home() {
             <BookName>{book.name}</BookName>
           </Book>
         )}
-      />
-  </Container>
+        />
+    </Container>
   );
 };

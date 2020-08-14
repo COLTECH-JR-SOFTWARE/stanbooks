@@ -34,7 +34,7 @@ const Navigation = ({navigation}) => {
           borderTopColor: 'rgba(255, 255, 255, 0.1)',
         },
         activeTintColor: '#FF6600',
-        inactiveTintColor:'#999'
+        inactiveTintColor:'rgba(255, 153, 51, 0.7)',
       }}
     >
       <Tab.Screen

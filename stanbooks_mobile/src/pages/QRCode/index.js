@@ -1,38 +1,55 @@
-import React, { useRef } from 'react';
+import React, { useState } from 'react';
 import { useSelector } from 'react-redux';
 import { Alert } from 'react-native';
 
 import api from '~services/api';
+import Spinner from './Spinner';
 
 import QRCodeScanner from 'react-native-qrcode-scanner';
 import { RNCamera } from 'react-native-camera';
 
 export default function QRCode(){
-  const scanner = useRef(null);
+  const [loading, setLoading] = useState(false);
   const userToken = useSelector(state => state.auth.token);
   const config = {
     headers: { Authorization: `Bearer ${userToken}` }
   };
 
-  function confirmAction(bookUrl){
-    Alert.alert(
-      "Novo empréstimo",
-      "Deseja Emprestar esse livro? (nome do livro)",
-      [
-        {
-          text: "Cancelar",
-          onPress: () => scanner.current.reactivate(),
-          style: "cancel"
-        },
-        { text: "OK", onPress: () => bookLoan(bookUrl) }
-      ],
-      { cancelable: false }
-    );
+  async function loadNameBook(bookId){
+    try {
+      const { data: book } = await api.get(`books/${bookId}`);
+      return book[0].name;
+    } catch(err){
+      console.log(err);
+    }
   }
 
-  async function bookLoan(bookUrl){
+  async function confirmAction(bookId){
+    setLoading(true);
+    try{
+      const bookName = await loadNameBook(bookId);
+
+      Alert.alert(
+        "Novo empréstimo",
+        `Deseja emprestar o livro ${bookName}?`,
+        [
+          {
+            text: "Cancelar",
+            onPress: () => setLoading(false),
+            style: "cancel"
+          },
+          { text: "OK", onPress: () => bookLoan(bookId) }
+        ],
+        { cancelable: false }
+      );
+    }catch(err){
+      alert('Falha na conexão');
+    }
+  }
+
+  async function bookLoan(bookId){
     try {
-      const data = { link: bookUrl}
+      const data = { link: bookId}
 
       await api.post('loan', data, config);
 
@@ -42,14 +59,17 @@ export default function QRCode(){
       alert('Falha no empréstimo')
     }
 
-    scanner.current.reactivate();
+    setLoading(false)
   }
 
   return (
-    <QRCodeScanner
-      onRead={e => confirmAction(e.data)}
-      flashMode={RNCamera.Constants.FlashMode.off}
-      ref={scanner}
-    />
+    <>
+      { loading ? <Spinner /> :
+        <QRCodeScanner
+          onRead={e => confirmAction(e.data)}
+          flashMode={RNCamera.Constants.FlashMode.off}
+        />
+      }
+    </>
   );
 }

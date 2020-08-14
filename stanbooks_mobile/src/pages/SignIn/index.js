@@ -1,14 +1,13 @@
 import React, { useRef, useState } from 'react';
-import { Image } from 'react-native';
 import { useDispatch } from 'react-redux';
 
-import logo from '~/assets/PNG/vertical-positiva.png'
+import logo from '~/assets/PNG/vertical-colorida-flat.png';
 
-import Background from '~/components/Background';
+import DefaultBackground from '~/components/DefaultBackground';
 
 import { signInRequest } from '~/store/modules/auth/actions';
 
-import { Container, Form, FormInput, SubmitButton, SignLink, SignLinkText } from './styles.js';
+import { Container, Form, FormInput, SubmitButton, SignLink, SignLinkText, Image } from './styles.js';
 
 export default function SignIn({ navigation }) {
   const dispatch = useDispatch();
@@ -22,7 +21,7 @@ export default function SignIn({ navigation }) {
   }
 
   return (
-    <Background>
+    <DefaultBackground>
       <Container>
         <Image source={logo}/>
 
@@ -54,9 +53,9 @@ export default function SignIn({ navigation }) {
         </Form>
 
         <SignLink onPress={() => navigation.navigate('SignUp')}>
-          <SignLinkText>Criar sua conta gratuita</SignLinkText>
+          <SignLinkText>Criar sua conta</SignLinkText>
         </SignLink>
       </Container>
-    </Background>
+    </DefaultBackground>
   );
 };

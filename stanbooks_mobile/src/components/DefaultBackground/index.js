@@ -1,7 +1,7 @@
 import React from 'react';
 import { View, ImageBackground, StyleSheet} from 'react-native';
 
-import image from '~/assets/books/sol.jpg';
+import image from '~/assets/books/fundo.jpg';
 
 function DefaultBackground(props){
   return (
