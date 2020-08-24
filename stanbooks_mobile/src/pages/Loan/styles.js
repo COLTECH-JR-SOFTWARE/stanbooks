@@ -1,10 +1,11 @@
 import styled from 'styled-components/native';
 
-import Input from '~/components/Input';
-import Button from '~/components/Button';
-
-export const Container = styled.View`
+export const Container = styled.SafeAreaView`
   flex: 1;
+`;
+
+export const Header = styled.SafeAreaView`
+  flex-direction: row
 `;
 
 export const ArrowBack = styled.View`
@@ -16,3 +17,18 @@ export const ArrowBack = styled.View`
 export const SignLink = styled.TouchableOpacity`
   margin-top: 20px;
 `;
+
+export const Title = styled.Text`
+  padding: 0 23% 0;
+  flex-direction: row;
+  font-size: 20px;
+  color: #111110;
+  font-weight: bold;
+  align-self: center;
+  margin-top: 20px;
+`;
+
+export const List = styled.FlatList.attrs({
+  showsVerticalScrollIndicator: false,
+  contentContainerStyle: { padding: 30}
+})``;

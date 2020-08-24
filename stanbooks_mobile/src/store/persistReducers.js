@@ -6,7 +6,7 @@ export default reducers => {
     {
       key: 'stanbooks',
       storage: AsyncStorage,
-      whitelist: ['auth', 'user'],
+      whitelist: ['auth', 'user', 'book'],
     },
     reducers
   );
