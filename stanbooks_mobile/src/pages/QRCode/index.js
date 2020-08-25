@@ -1,55 +1,75 @@
-import React, { Component } from 'react';
+import React, { useState } from 'react';
+import { useSelector } from 'react-redux';
+import { Alert } from 'react-native';
 
-import {
-  AppRegistry,
-  StyleSheet,
-  Text,
-  TouchableOpacity,
-  Linking
-} from 'react-native';
+import api from '~services/api';
+import Spinner from './Spinner';
 
 import QRCodeScanner from 'react-native-qrcode-scanner';
 import { RNCamera } from 'react-native-camera';
 
-function QRCode(){
-  const onSuccess = e => {
-    alert(e.data);
-    // Linking.openURL(e.data).catch(err =>
-    //   console.error('An error occured', err)
-    // );
+export default function QRCode(){
+  const [loading, setLoading] = useState(false);
+  const userToken = useSelector(state => state.auth.token);
+  const config = {
+    headers: { Authorization: `Bearer ${userToken}` }
   };
 
-  return (
-    <QRCodeScanner
-      onRead={onSuccess}
-      flashMode={RNCamera.Constants.FlashMode.off}
-      bottomContent={
-        <TouchableOpacity style={styles.buttonTouchable}>
+  async function loadNameBook(bookId){
+    try {
+      const { data: book } = await api.get(`books/${bookId}`);
+      return book[0].name;
+    } catch(err){
+      console.log(err);
+    }
+  }
 
-        </TouchableOpacity>
+  async function confirmAction(bookId){
+    setLoading(true);
+    try{
+      const bookName = await loadNameBook(bookId);
+
+      Alert.alert(
+        "Novo empréstimo",
+        `Deseja emprestar o livro ${bookName}?`,
+        [
+          {
+            text: "Cancelar",
+            onPress: () => setLoading(false),
+            style: "cancel"
+          },
+          { text: "OK", onPress: () => bookLoan(bookId) }
+        ],
+        { cancelable: false }
+      );
+    }catch(err){
+      alert('Falha na conexão');
+    }
+  }
+
+  async function bookLoan(bookId){
+    try {
+      const data = { link: bookId}
+
+      await api.post('loan', data, config);
+
+      alert('Empréstimo Realizado');
+    }catch(err){
+      console.log(err);
+      alert('Falha no empréstimo')
+    }
+
+    setLoading(false)
+  }
+
+  return (
+    <>
+      { loading ? <Spinner /> :
+        <QRCodeScanner
+          onRead={e => confirmAction(e.data)}
+          flashMode={RNCamera.Constants.FlashMode.off}
+        />
       }
-    />
+    </>
   );
 }
-
-const styles = StyleSheet.create({
-  centerText: {
-    flex: 1,
-    fontSize: 18,
-    padding: 32,
-    color: '#777'
-  },
-  textBold: {
-    fontWeight: '500',
-    color: '#000'
-  },
-  buttonText: {
-    fontSize: 21,
-    color: 'rgb(0,122,255)'
-  },
-  buttonTouchable: {
-    padding: 16
-  }
-});
-
-export default QRCode;
