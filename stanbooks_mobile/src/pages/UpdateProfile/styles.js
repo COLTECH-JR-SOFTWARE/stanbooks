@@ -3,11 +3,16 @@ import styled from 'styled-components/native';
 import Input from '~/components/Input';
 import Button from '~/components/Button';
 
+export const Header = styled.SafeAreaView`
+  flex-direction: row
+`;
+
 export const Container = styled.View`
   flex: 1;
 `;
 
 export const Title = styled.Text`
+  padding: 0 23% 0;
   font-size: 20px;
   color: #111110;
   font-weight: bold;

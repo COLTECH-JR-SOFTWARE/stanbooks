@@ -1,5 +1,5 @@
 import { Alert } from 'react-native';
-import { takeLatest, call, put, all, delay } from 'redux-saga/effects';
+import { takeLatest, call, put, all } from 'redux-saga/effects';
 
 import api from '~/services/api';
 
@@ -17,8 +17,6 @@ export function* signIn({ payload }) {
     const { token, name } = response.data;
 
     const user = { name, email};
-
-    console.tron.log(user);
 
     // if (user.provider) {
     //   Alert.alert(

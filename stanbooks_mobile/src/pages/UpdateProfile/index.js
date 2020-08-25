@@ -2,7 +2,7 @@ import React, { useRef, useState } from 'react';
 import { useSelector, useDispatch } from 'react-redux';
 import MaterialIcons from 'react-native-vector-icons/MaterialIcons';
 
-import { Container, Title, Form, FormInput, Separator, SubmitButton, ArrowBack, SignLink } from './styles';
+import { Container, Title, Form, FormInput, Separator, SubmitButton, ArrowBack, SignLink, Header } from './styles';
 
 import DefaultBackground from '~/components/DefaultBackground';
 
@@ -39,13 +39,15 @@ const UpdateProfile = ({navigation}) => {
   return (
     <DefaultBackground>
       <Container>
+      <Header>
         <ArrowBack>
           <SignLink onPress={() => navigation.navigate('Navigation')}>
             <MaterialIcons name="arrow-back" size={28} color="#FF6600"/>
           </SignLink>
         </ArrowBack>
 
-        <Title>Atualização do perfil</Title>
+        <Title>Atualizar perfil</Title>
+      </Header>
 
         <Form>
         <FormInput

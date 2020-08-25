@@ -1,63 +1,38 @@
-import { StyleSheet } from 'react-native';
+import styled from 'styled-components/native';
 
-export default StyleSheet.create({
-  container: {
-    flex: 1,
-    backgroundColor: 'white',
-    paddingVertical: 20,
-    paddingHorizontal: 20
-  },
-  result: {
-    fontSize: 22,
-    textAlign: 'center',
-    marginVertical: 15,
-    color: '#444',
-  },
-  searchBar : {
-    flexDirection: 'row',
-    alignItems: 'center',
-    borderWidth: 1,
-    borderColor: '#C9C9C9',
-    borderRadius: 6,
-    paddingHorizontal: 8
-  },
-  searchInput: {
-    flex: 1,
-    fontSize: 16,
-    paddingVertical: 6
-  },
-  bookList: {
-    padding: 5
-  },
-  listContent: {
-    alignItems: 'center',
-  },
-  book: {
-    width: 150,
-    marginHorizontal: 5,
-    marginBottom: 20,
-  },
-  bookNameContainer: {
-    backgroundColor: 'blue'
-  },
-  bookName: {
-    fontSize: 16,
-    fontWeight: '500',
-    color: '#444',
-    textAlign: 'center',
-  },
-  imageContainer: {
-    backgroundColor: '#F6F6F6',
-    height: '70%',
-    borderRadius: 6,
-    padding: 15,
-    marginBottom: 5,
-    height: 160,
-  },
-  imageBook: {
-    flex: 1,
-    width: null,
-    height: null,
-    resizeMode: 'contain'
-  }
-});
+export const Container = styled.View`
+  flex: 1;
+  padding: 20px;
+`;
+
+export const List = styled.FlatList`
+  padding: 5px;
+`;
+
+export const Book = styled.View`
+  width: 150px;
+  margin: 0 5px 20px;
+`;
+
+export const ImageContainer = styled.View`
+  background-color: #F6F6F6;
+  height: 70%;
+  border-radius: 6px;
+  padding: 15px;
+  margin-bottom: 5px;
+  height: 160px;
+`;
+
+export const BookImage = styled.Image`
+  flex: 1;
+  width: null;
+  height: null;
+  resizeMode: contain;
+`;
+
+export const BookName = styled.Text`
+  font-size: 16px;
+  font-weight: 500;
+  color: #444;
+  text-align: center;
+`;

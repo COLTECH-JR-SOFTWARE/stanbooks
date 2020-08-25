@@ -37,11 +37,11 @@ const Perfil = ({navigation}) => {
             <LinkText>Empréstimos</LinkText>
           </LogoutButton>
 
-          <LogoutButton onPress={() => navigation.navigate('Loan')} >
+          <LogoutButton onPress={() => navigation.navigate('Delayed')} >
             <LinkText>Atrasados</LinkText>
           </LogoutButton>
 
-          <LogoutButton onPress={() => navigation.navigate('Loan')} >
+          <LogoutButton onPress={() => navigation.navigate('Booking')} >
             <LinkText>Reservas</LinkText>
           </LogoutButton>
 
