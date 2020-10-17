@@ -1,5 +1,6 @@
 import * as Yup from 'yup';
 
+import User from '../models/User';
 import Book from '../models/Book';
 import File from '../models/File';
 import Loan from '../models/Loan';
@@ -14,7 +15,10 @@ class LoanController {
       return res.status(400).json({ error: 'Validation fails' });
     }
 
+    // link agora é o ID do livro, pra simplificar
     const { link } = req.body;
+
+    const date = new Date();
 
     const bookExist = await Book.findOne({
       where: { id: link },
@@ -33,13 +37,20 @@ class LoanController {
     }
 
     const user_id = req.userId;
+
     const book_id = bookExist.id;
 
-    const loan = { link, user_id, book_id };
+    const book_name = bookExist.name;
+
+    const user = await User.findByPk(user_id);
+
+    const { name, email } = user;
+
+    const loan = { link, user_id, book_id, date };
 
     await Loan.create(loan);
 
-    return res.json(loan);
+    return res.json({ loan, name, email, book_name });
   }
 
   async index(req, res) {

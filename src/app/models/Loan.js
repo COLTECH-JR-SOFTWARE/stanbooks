@@ -5,6 +5,7 @@ class Loan extends Model {
     super.init(
       {
         link: Sequelize.STRING,
+        date: Sequelize.DATE,
       },
       {
         sequelize,

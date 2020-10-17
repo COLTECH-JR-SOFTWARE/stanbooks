@@ -10,6 +10,7 @@ import FileController from './app/controllers/FileController';
 import BookController from './app/controllers/BookController';
 import LoanController from './app/controllers/LoanController';
 import SearchController from './app/controllers/SearchController';
+import RecoveryController from './app/controllers/RecoveryController';
 
 const routes = new Router();
 const upload = multer(multerConfig);
@@ -17,6 +18,7 @@ const upload = multer(multerConfig);
 routes.post('/users', UserController.store);
 routes.get('/users', UserController.index);
 routes.post('/sessions', SessionController.store);
+routes.post('/recovery-pass', RecoveryController.store);
 
 routes.use(authMiddleware); // as rotas abaixo precisarão de autenticação para serem acessadas
 
