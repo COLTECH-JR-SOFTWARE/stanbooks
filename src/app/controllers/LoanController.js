@@ -46,7 +46,7 @@ class LoanController {
 
     const { name, email } = user;
 
-    const loan = { link, user_id, book_id, date };
+    const loan = { link, user_id, book_id };
 
     await Loan.create(loan);
 
