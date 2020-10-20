@@ -37,5 +37,6 @@ routes.get('/search/book', SearchController.store);
 
 routes.post('/loan', LoanController.store);
 routes.get('/loan', LoanController.index);
+routes.get('/loan/:id', LoanController.show);
 
 export default routes;

@@ -74,6 +74,14 @@ class LoanController {
 
     return res.json(books);
   }
+
+  async show(req, res) {
+    const { id } = req.params;
+
+    const loan = await Loan.findByPk(id);
+
+    return res.json(loan);
+  }
 }
 
 export default new LoanController();
