@@ -57,7 +57,7 @@ class LoanController {
   async index(req, res) {
     const id = req.userId;
 
-    const books = await Loan.findAll({
+    const loans = await Loan.findAll({
       where: { user_id: id, deleted_at: null },
       include: [
         {
@@ -73,13 +73,27 @@ class LoanController {
       ],
     });
 
-    return res.json(books);
+    return res.json(loans);
   }
 
   async show(req, res) {
     const { id } = req.params;
 
-    const loan = await Loan.findByPk(id);
+    const loan = await Loan.findOne({
+      where: { id },
+      include: [
+        {
+          model: Book,
+          attributes: ['name', 'image_id'],
+          include: [
+            {
+              model: File,
+              attributes: ['url_image', 'image', 'name'],
+            },
+          ],
+        },
+      ],
+    });
 
     return res.json(loan);
   }
