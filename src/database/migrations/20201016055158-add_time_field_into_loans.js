@@ -4,8 +4,7 @@ module.exports = {
       type: Sequelize.DATE,
       onUpdate: 'CASCADE',
       onDelete: 'SET NULL',
-      allowNull: false,
-      defaultValue: null,
+      allowNull: true,
     });
   },
 
