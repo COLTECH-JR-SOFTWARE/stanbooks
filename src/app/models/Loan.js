@@ -10,6 +10,7 @@ class Loan extends Model {
       },
       {
         sequelize,
+        paranoid: true,
       }
     );
 

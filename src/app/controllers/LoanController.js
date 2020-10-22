@@ -121,9 +121,7 @@ class LoanController {
 
     const loan = await Loan.findByPk(id);
 
-    loan.deleted_at = new Date();
-
-    await loan.save();
+    await loan.destroy();
 
     return res.json(loan);
   }
