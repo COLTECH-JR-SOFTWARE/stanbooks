@@ -19,7 +19,7 @@ class LoanController {
     // link agora é o ID do livro, pra simplificar
     const { link } = req.body;
 
-    const date = new Date();
+    const date = moment.tz('America/Manaus').format();
 
     const bookExist = await Book.findOne({
       where: { id: link },
@@ -57,12 +57,8 @@ class LoanController {
   async index(req, res) {
     const id = req.userId;
 
-    const a = moment.tz('America/Manaus').format();
-    console.log('Time moment:');
-    console.log(a);
-
     const books = await Loan.findAll({
-      where: { user_id: id },
+      where: { user_id: id, deleted_at: null },
       include: [
         {
           model: Book,
@@ -77,13 +73,43 @@ class LoanController {
       ],
     });
 
-    return res.json({ books, a });
+    return res.json(books);
   }
 
   async show(req, res) {
     const { id } = req.params;
 
     const loan = await Loan.findByPk(id);
+
+    return res.json(loan);
+  }
+
+  async delete(req, res) {
+    const { id } = req.params;
+
+    const indexExist = await Loan.findOne({
+      where: { id, deleted_at: null },
+    });
+
+    if (!indexExist) {
+      return res.status(400).json({ error: 'Loan not found' });
+    }
+
+    const userProvider = await User.findAll({
+      where: { provider: true },
+    });
+
+    if (!userProvider) {
+      return res
+        .status(400)
+        .json({ error: 'Only providers can delete a book' });
+    }
+
+    const loan = await Loan.findByPk(id);
+
+    loan.deleted_at = new Date();
+
+    await loan.save();
 
     return res.json(loan);
   }
