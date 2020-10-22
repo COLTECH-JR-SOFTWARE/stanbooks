@@ -1,4 +1,5 @@
 import * as Yup from 'yup';
+import moment from 'moment-timezone';
 
 import User from '../models/User';
 import Book from '../models/Book';
@@ -19,6 +20,8 @@ class LoanController {
     const { link } = req.body;
 
     const date = new Date();
+
+    moment.tz('America/Manaus').format();
 
     const bookExist = await Book.findOne({
       where: { id: link },
