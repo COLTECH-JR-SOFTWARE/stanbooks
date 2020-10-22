@@ -76,7 +76,7 @@ class LoanController {
       ],
     });
 
-    return res.json(books, a);
+    return res.json({ books, a });
   }
 
   async show(req, res) {
