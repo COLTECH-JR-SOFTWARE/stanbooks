@@ -6,6 +6,7 @@ class Loan extends Model {
       {
         link: Sequelize.STRING,
         date: Sequelize.DATE,
+        deleted_at: Sequelize.DATE,
       },
       {
         sequelize,
