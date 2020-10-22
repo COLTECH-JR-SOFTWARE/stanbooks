@@ -21,7 +21,8 @@ class LoanController {
 
     const date = new Date();
 
-    moment.tz('America/Manaus').format();
+    const a = moment.tz('America/Manaus').format();
+    console.log(a);
 
     const bookExist = await Book.findOne({
       where: { id: link },
