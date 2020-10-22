@@ -58,6 +58,7 @@ class LoanController {
     const id = req.userId;
 
     const a = moment.tz('America/Manaus').format();
+    console.log('Time moment:');
     console.log(a);
 
     const books = await Loan.findAll({
