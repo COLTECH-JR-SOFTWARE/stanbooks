@@ -21,9 +21,6 @@ class LoanController {
 
     const date = new Date();
 
-    const a = moment.tz('America/Manaus').format();
-    console.log(a);
-
     const bookExist = await Book.findOne({
       where: { id: link },
     });
@@ -60,6 +57,9 @@ class LoanController {
   async index(req, res) {
     const id = req.userId;
 
+    const a = moment.tz('America/Manaus').format();
+    console.log(a);
+
     const books = await Loan.findAll({
       where: { user_id: id },
       include: [
@@ -76,7 +76,7 @@ class LoanController {
       ],
     });
 
-    return res.json(books);
+    return res.json(books, a);
   }
 
   async show(req, res) {
