@@ -1,13 +1,12 @@
 export default {
-  // host: process.env.MAIL_HOST,
-  // port: process.env.MAIL_PORT,
-  service: 'gmail',
+  host: 'smtp.mailtrap.io',
+  port: 2525,
   secure: false,
   auth: {
-    user: 'coltechjr@gmail.com',
-    pass: 'MelhorEJ',
+    user: 'cb5e08079e7fb3',
+    pass: '1929af771379ff',
   },
   default: {
-    from: 'Stanbooks <noreply@stanbooks.com>',
+    from: 'Equipe Stanbooks <noreply@stanbooks.com>',
   },
 };

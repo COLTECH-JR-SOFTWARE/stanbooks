@@ -1,6 +1,7 @@
 import * as Yup from 'yup';
-import Mail from '../../lib/Mail';
+import bcrypt from 'bcryptjs';
 import User from '../models/User';
+import Mail from '../../lib/Mail';
 
 class RecoveryController {
   async store(req, res) {
@@ -27,11 +28,12 @@ class RecoveryController {
       subject: 'Recuperação de senha',
       template: 'recovery',
       context: {
-        user: user.name,
+        name: user.name,
+        password: user.password_hash,
       },
     });
 
-    return res.json({ user });
+    return res.json({ ok: true });
   }
 }
 export default new RecoveryController();
