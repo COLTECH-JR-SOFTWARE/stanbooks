@@ -5,9 +5,12 @@ class Loan extends Model {
     super.init(
       {
         link: Sequelize.STRING,
+        date: Sequelize.DATE,
+        deleted_at: Sequelize.DATE,
       },
       {
         sequelize,
+        paranoid: true,
       }
     );
 
