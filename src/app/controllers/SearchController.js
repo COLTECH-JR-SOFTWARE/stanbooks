@@ -5,10 +5,10 @@ import File from '../models/File';
 
 class SearchController {
   async store(req, res) {
-    const query = `%${req.query.name}%`;
+    const query = `${req.query.name}%`;
 
     const bookExists = await Book.findAll({
-      where: { name: { [Op.iLike]: query } },
+      where: { name: { [Op.iLike]: query }, deleted_at: null },
       attributes: ['id', 'name', 'url', 'image_id'],
       include: [
         {
