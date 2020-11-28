@@ -28,8 +28,8 @@
 #define D10 1
 
 // WIFI
-const char *SSID = "RSF 1";         // SSID / nome da rede WI-FI que deseja se conectar
-const char *PASSWORD = "6011316RS"; // Senha da rede WI-FI que deseja se conectar
+const char *SSID = "SSSID_DA_REDE_WIFI";         // SSID / nome da rede WI-FI que deseja se conectar
+const char *PASSWORD = "SENHA_DA_REDE_WIFI"; // Senha da rede WI-FI que deseja se conectar
 
 // MQTT
 const char *BROKER_MQTT = "192.168.0.6"; //URL do broker MQTT que se deseja utilizar
