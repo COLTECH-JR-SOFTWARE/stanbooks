@@ -145,6 +145,9 @@ class LoanController {
 
     await loan.destroy();
 
+    const idUser = req.userId;
+    publisher(idUser);
+
     return res.json({ ok: true });
   }
 }
