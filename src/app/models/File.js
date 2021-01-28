@@ -24,13 +24,19 @@ class File extends Model {
     });
 
     this.addHook('beforeDestroy', (file) => {
-      if (!process.env.STORAGE_TYPE === 's3') {
+      if (process.env.STORAGE_TYPE === 's3') {
         return s3
           .deleteObject({
             Bucket: 'uploadstanbooks',
             Key: file.image,
           })
-          .promise();
+          .promise()
+          .then((response) => {
+            console.log(response.status);
+          })
+          .catch((response) => {
+            console.log(response.status);
+          });
       }
     });
 
