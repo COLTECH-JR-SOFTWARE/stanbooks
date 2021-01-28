@@ -16,7 +16,6 @@ class LoanController {
       return res.status(400).json({ error: 'Validation fails' });
     }
 
-    // link agora é o ID do livro, pra simplificar
     const { link } = req.body;
 
     const date = moment.tz('America/Manaus').format();
@@ -124,6 +123,24 @@ class LoanController {
     await loan.destroy();
 
     return res.json(loan);
+  }
+
+  async delete(req, res) {
+    const { id } = req.params;
+
+    const indexExist = await Loan.findOne({
+      where: { id },
+    });
+
+    if (!indexExist) {
+      return res.status(400).json({ error: 'Loan not found' });
+    }
+
+    const loan = await Loan.findByPk(id);
+
+    await loan.destroy();
+
+    return res.json({ ok: true });
   }
 }
 
